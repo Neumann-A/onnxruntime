@@ -31,16 +31,6 @@ On Linux, it matters when one static library references another.
 
 So, in general, please always put them in right order (according to their dependency relationship).
 
-
-# Don't call target\_link\_libraries on static libraries
-You could do it, but please don't.
-
-As we said before, library order matters. If you explicitly list all the libs in one line, and if some libs were in wrong position, it's easy to fix. 
-
-However, if any static lib was built with target\_link\_libraries,
-- First you should know ,there is no link step for a static lib
-- Second, once you hit the ordering problem, it would be harder to fix. Because many of the deps were implicit, and their position would be out of our control.
-
 # Every linux program(and shared lib) should link to libpthread and libatomic
 In Linux world, there are two set of pthread symbols. A fake one in the standard c library, and a real one in pthread.so. If the real one is not loaded while the process was starting up, then the process shouldn't use multiple threading because the core part was missing.
 
